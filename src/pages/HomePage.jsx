@@ -1,5 +1,5 @@
-import React, { useEffect } from "react"
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react"
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import useInput from '../hooks/useInput'
@@ -31,6 +31,8 @@ export default function HomePage() {
   } = useSelector((states) => states);
 
   const [title, onTitleHandler] = useInput('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [keyword, setKeyword] = useState(() => searchParams.get('keyword') || '');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -48,6 +50,11 @@ export default function HomePage() {
     dispatch(asyncAddThread({ title, body, category }));
   }
 
+  const onKeywordChangeHandler = (keyword) => {
+    setSearchParams({ keyword });
+    setKeyword(keyword);
+  };
+
   const voteThreadHandler = {
     up: (e, id) => { e.stopPropagation(); dispatch(asyncUpVoteThread(id)) },
     down: (e, id) => { e.stopPropagation(); dispatch(asyncDownVoteThread(id)) },
@@ -62,9 +69,13 @@ export default function HomePage() {
     authUser,
   }))
 
+  const filteredThreadList = threadList.slice(0).filter((thread) => {
+    return thread.title.toLowerCase().includes(keyword.toLowerCase())
+  })
+
   return (
     <div className="bg-[#282c34]/10 min-h-screen">
-      <HeaderApp user={authUser} signout={onSignOut} />
+      <HeaderApp user={authUser} signout={onSignOut} keyword={keyword} keywordChange={onKeywordChangeHandler}/>
       <main className="">
         <aside className="w-[25%] pl-9 pr-7 pt-5 fixed">
           <NavBar />
@@ -73,7 +84,7 @@ export default function HomePage() {
         </aside>
         <div className="ml-[25%] pt-5 pr-6 z-40">
           <AddThread titleChange={onTitleHandler} />
-          <ThreadLists threadList={threadList} voteHandler={voteThreadHandler} />
+          <ThreadLists threadList={filteredThreadList} voteHandler={voteThreadHandler} />
         </div>
       </main>
       <AddThreadModal title={title} titleChange={onTitleHandler} addHandler={addThread} />

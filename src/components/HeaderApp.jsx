@@ -5,7 +5,7 @@ import logo from '../assets/logo.svg';
 import SearchBar from "./SearchBar";
 import Profile from "./Profile";
 
-export default function HeaderApp({ user, signout }) {
+export default function HeaderApp({ user, signout, keyword, keywordChange }) {
   const { pathname } = useLocation();
 
   return (
@@ -18,7 +18,7 @@ export default function HeaderApp({ user, signout }) {
           </a>
           <div className="flex-1 flex flex-row-reverse">
             <Profile user={user} signout={signout} />
-            {pathname === '/' && <SearchBar />}
+            {pathname === '/' && <SearchBar keyword={keyword} keywordChange={keywordChange} />}
           </div>
         </div>
       </div>
