@@ -2,7 +2,7 @@ import React from "react";
 import ThreadItem from "./ThreadItem";
 
 export default function ThreadLists({ threadList, voteHandler }) {
-  if (!threadList) {
+  if (!threadList || threadList.length === 0) {
     return (
       <div className="mt-6">
         <p className="text-center">Nothing Here...</p>

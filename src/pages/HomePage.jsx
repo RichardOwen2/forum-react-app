@@ -31,6 +31,7 @@ export default function HomePage() {
   } = useSelector((states) => states);
 
   const [title, onTitleHandler] = useInput('');
+  const [homeNav, setHomeNav] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const [keyword, setKeyword] = useState(() => searchParams.get('keyword') || '');
 
@@ -55,6 +56,14 @@ export default function HomePage() {
     setKeyword(keyword);
   };
 
+  const onHomeNavChangeHandler = (condition) => {
+    if (authUser) {
+      setHomeNav(condition);
+    } else {
+      setHomeNav(true);
+    }
+  }
+
   const voteThreadHandler = {
     up: (e, id) => { e.stopPropagation(); dispatch(asyncUpVoteThread(id)) },
     down: (e, id) => { e.stopPropagation(); dispatch(asyncDownVoteThread(id)) },
@@ -69,16 +78,26 @@ export default function HomePage() {
     authUser,
   }))
 
-  const filteredThreadList = threadList.slice(0).filter((thread) => {
-    return thread.title.toLowerCase().includes(keyword.toLowerCase())
-  })
+  let filteredThreadList
+
+  if (homeNav) {
+    filteredThreadList = threadList.slice(0).filter((thread) => {
+      return thread.title.toLowerCase().includes(keyword.toLowerCase());
+    })
+  } else {
+    filteredThreadList = threadList.slice(0).filter((thread) => {
+      return thread.title.toLowerCase().includes(keyword.toLowerCase())
+    }).filter((thread) => {
+      return thread.ownerId === authUser.id;
+    })
+  }
 
   return (
     <div className="bg-[#282c34]/10 min-h-screen">
       <HeaderApp user={authUser} signout={onSignOut} keyword={keyword} keywordChange={onKeywordChangeHandler}/>
       <main className="">
         <aside className="w-[25%] pl-9 pr-7 pt-5 fixed">
-          <NavBar />
+          <NavBar nav={homeNav} navChange={onHomeNavChangeHandler}/>
           <Trending threadList={threadList} />
           <LeaderBoards leaderboard={leaderboard} />
         </aside>
