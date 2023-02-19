@@ -34,6 +34,9 @@ export default function HomePage() {
   const [homeNav, setHomeNav] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const [keyword, setKeyword] = useState(() => searchParams.get('keyword') || '');
+  const [matches, setMatches] = useState(
+    window.matchMedia("(min-width: 1024px)").matches
+  )
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,6 +45,12 @@ export default function HomePage() {
     dispatch(asyncPopulateUsersAndThreads());
     dispatch(asyncReceiveLeaderboards());
   }, [dispatch])
+
+  useEffect(() => {
+    window
+      .matchMedia("(min-width: 1024px)")
+      .addEventListener('change', (e) => setMatches(e.matches));
+  }, []);
 
   const onSignOut = () => {
     dispatch(asyncUnsetAuthUser());
@@ -90,11 +99,13 @@ export default function HomePage() {
 
   if (homeNav) {
     filteredThreadList = threadList.slice(0).filter((thread) => {
-      return thread.title.toLowerCase().includes(keyword.toLowerCase());
+      const { title, category } = thread;
+      return title.toLowerCase().includes(keyword.toLowerCase()) || category.toLowerCase().includes(keyword.toLowerCase());
     })
   } else {
     filteredThreadList = threadList.slice(0).filter((thread) => {
-      return thread.title.toLowerCase().includes(keyword.toLowerCase()) && thread.ownerId === authUser.id;
+      const { title, category } = thread;
+      return (title.toLowerCase().includes(keyword.toLowerCase()) || category.toLowerCase().includes(keyword.toLowerCase())) && thread.ownerId === authUser.id;
     })
   }
 
@@ -102,15 +113,16 @@ export default function HomePage() {
     <div className="bg-[#282c34]/10 min-h-screen">
       <HeaderApp user={authUser} signout={onSignOut} keyword={keyword} keywordChange={onKeywordChangeHandler}/>
       <main>
-        <aside className="w-[25%] pl-9 pr-7 pt-5 fixed">
-          <NavBar nav={homeNav} navChange={onHomeNavChangeHandler}/>
-          <Trending threadList={trendingThreadList} />
-          <LeaderBoards leaderboard={leaderboard} />
+        <aside className="xl:w-[25%] lg:w-[30%] pl-9 pr-7 pt-5 lg:fixed">
+          {matches && <NavBar nav={homeNav} navChange={onHomeNavChangeHandler} width={matches} />}
+          <Trending threadList={trendingThreadList} width={matches}/>
+          <LeaderBoards leaderboard={leaderboard} width={matches} />
         </aside>
-        <div className="ml-[25%] pt-5 pr-6 z-40">
-          <AddThread titleChange={onTitleHandler} />
+        <div className="xl:ml-[25%] lg:ml-[30%] ml-9 pt-5 pr-6 z-40">
+          <AddThread titleChange={onTitleHandler} authUser={authUser} />
           <ThreadLists threadList={filteredThreadList} voteHandler={voteThreadHandler} />
         </div>
+        {!matches && <NavBar nav={homeNav} navChange={onHomeNavChangeHandler} width={matches} />}
       </main>
       <AddThreadModal title={title} titleChange={onTitleHandler} addHandler={addThread} />
     </div>

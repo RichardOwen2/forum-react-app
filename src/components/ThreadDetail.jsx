@@ -15,7 +15,7 @@ export default function ThreadDetail({ id, title, body, category, createdAt, own
         </div>
         <p className="ml-2">{name}</p>
         <div className="ml-auto">
-          <p className="mr-5 text-gray-800">{postedAt(createdAt)}</p>
+          <p className="md:mr-5 text-gray-800">{postedAt(createdAt)}</p>
         </div>
       </div>
 

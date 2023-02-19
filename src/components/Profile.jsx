@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 export default function Profile({ user, signout }) {
   if (!user) {
     return (
-      <div className="my-auto mr-8">
+      <div className="my-auto lg:mr-8 md:mr-4">
         <Link to={'/login'}>
-          <p className="bg-gray-600 py-2 px-6 rounded-lg text-white font-bold hover:bg-gray-500">Login to Forum!</p>
+          <p className="bg-gray-600 py-2 px-6 rounded-lg text-white lg:text-base md:text-xs font-bold hover:bg-gray-500">Login to Forum!</p>
         </Link>
       </div>
     );
@@ -15,7 +15,7 @@ export default function Profile({ user, signout }) {
   const { email, name, avatar } = user;
 
   return (
-      <div className="my-auto mr-8 flex justify-center items-center">
+      <div className="my-auto md:mr-8 mr-1 flex justify-center items-center">
         <div className="flex justify-center">
           <div>
             <div className="dropdown relative">
@@ -26,7 +26,7 @@ export default function Profile({ user, signout }) {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                <img src={avatar} alt="./src/assets/default-profile.jpg" className="rounded-full w-12" />
+                <img src={avatar} alt="./src/assets/default-profile.jpg" className="rounded-full md:w-12 w-8" />
                 <svg
                   aria-hidden="true"
                   focusable="false"

@@ -9,12 +9,12 @@ export default function HeaderApp({ user, signout, keyword, keywordChange }) {
   const { pathname } = useLocation();
 
   return (
-    <header className="sticky top-0">
+    <header className="sticky top-0 z-50">
       <div className="flex-1 bg-[#282c34]">
         <div className="flex">
           <Link to={'/'} className="flex">
-            <img src={logo} className="App-logo w-20 ml-2" alt="logo" />
-            <h1 className="font-extrabold text-white text-3xl pl-2 py-7">Forum React</h1>
+            <img src={logo} className="App-logo lg:w-20 md:w-16 w-12 ml-2" alt="logo" />
+            <h1 className="font-extrabold lg:text-2xl md:text-xl text-base text-white pl-2 py-7">Forum React</h1>
           </Link>
           <div className="flex-1 flex flex-row-reverse">
             <Profile user={user} signout={signout} />

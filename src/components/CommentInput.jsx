@@ -1,50 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BsFillChatFill } from 'react-icons/bs'
 import useInput from "../hooks/useInput";
 
 export default function CommentInput({ authUser, addComment }) {
   const [content, onContentChange] = useInput('');
-
-  useEffect(() => {
-    let observe;
-    if (window.attachEvent) {
-      observe = function (element, event, handler) {
-        element.attachEvent('on' + event, handler);
-      };
-    }
-    else {
-      observe = function (element, event, handler) {
-        element.addEventListener(event, handler, false);
-      };
-    }
-
-    function init() {
-      let text = document.getElementById('content');
-      function resize() {
-        text.style.height = 'auto';
-        if (text.scrollHeight < 80) {
-          text.style.height = '60px';
-        } else {
-          text.style.height = text.scrollHeight + 'px';
-        }
-      }
-      function delayedResize() {
-        window.setTimeout(resize, 0);
-      }
-      observe(text, 'change', resize);
-      observe(text, 'cut', delayedResize);
-      observe(text, 'paste', delayedResize);
-      observe(text, 'drop', delayedResize);
-      observe(text, 'keydown', delayedResize);
-
-      text.focus();
-
-      resize();
-    }
-
-    init()
-  }, [])
+  const [height, setHeight] = useState(80);
 
   if (!authUser) {
     return (
@@ -55,6 +16,15 @@ export default function CommentInput({ authUser, addComment }) {
       </div>
     );
   }
+
+  useEffect(() => {
+    const height = document.getElementById('content').scrollHeight;
+    if (height > 80) {
+      setHeight(height)
+    } else {
+      setHeight(80);
+    }
+  });
 
   const { name, avatar } = authUser;
 
@@ -69,6 +39,7 @@ export default function CommentInput({ authUser, addComment }) {
             type="content"
             id="content"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 overflow-hidden resize-none"
+            style = {{height: `${height}px`}}
             placeholder={`Reply as ${name}`}
             value={content}
             onChange={onContentChange}

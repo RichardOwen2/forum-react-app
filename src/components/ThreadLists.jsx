@@ -5,7 +5,7 @@ export default function ThreadLists({ threadList, voteHandler }) {
   if (!threadList || threadList.length === 0) {
     return (
       <div className="mt-6">
-        <p className="text-center">Nothing Here...</p>
+        <p className="text-center lg:pb-4 pb-20">Nothing Here...</p>
       </div>
     );
   }
@@ -15,7 +15,7 @@ export default function ThreadLists({ threadList, voteHandler }) {
       { threadList.map((thread) => (
         <ThreadItem key={thread.id} {...thread} voteHandler={voteHandler} />
       )) }
-      <p className="text-center pb-4">End Of Story..</p>
+      <p className="text-center lg:pb-4 pb-20">End Of Story..</p>
     </div>
   );
 }

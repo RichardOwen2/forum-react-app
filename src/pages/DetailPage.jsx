@@ -65,7 +65,7 @@ export default function DetailPage() {
   return (
     <div className="bg-[#282c34]/10 min-h-screen">
       <HeaderApp user={authUser} signout={onSignOut} />
-      <main className="mx-[15%] p-8 bg-white min-h-screen shadow-md">
+      <main className="md:mx-[15%] p-8 bg-white min-h-screen shadow-md">
         <ThreadDetail voteHandler={voteThreadHandler} authUser={authUser} {...threadDetail} />
         <hr className="h-px my-6 bg-gray-700 border-0"></hr>
         <CommentInput authUser={authUser} addComment={addComment} />

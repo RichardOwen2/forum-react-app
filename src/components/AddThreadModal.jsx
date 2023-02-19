@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { BsFillChatFill } from 'react-icons/bs'
 import { MdCancel } from 'react-icons/md'
 import useInput from "../hooks/useInput";
@@ -6,46 +6,16 @@ import useInput from "../hooks/useInput";
 export default function AddModal({ title, titleChange, addHandler }) {
   const [body, onBodyChange] = useInput('')
   const [category, onCategoryChange] = useInput('');
+  const [height, setHeight] = useState(80);
 
   useEffect(() => {
-    let observe;
-    if (window.attachEvent) {
-      observe = function (element, event, handler) {
-        element.attachEvent('on' + event, handler);
-      };
+    const height = document.getElementById('body').scrollHeight;
+    if (height > 80) {
+      setHeight(height)
+    } else {
+      setHeight(80);
     }
-    else {
-      observe = function (element, event, handler) {
-        element.addEventListener(event, handler, false);
-      };
-    }
-
-    function init() {
-      let text = document.getElementById('body');
-      function resize() {
-        text.style.height = 'auto';
-        if (text.scrollHeight < 80) {
-          text.style.height = '80px';
-        } else {
-          text.style.height = text.scrollHeight + 'px';
-        }
-      }
-      function delayedResize() {
-        window.setTimeout(resize, 0);
-      }
-      observe(text, 'change', resize);
-      observe(text, 'cut', delayedResize);
-      observe(text, 'paste', delayedResize);
-      observe(text, 'drop', delayedResize);
-      observe(text, 'keydown', delayedResize);
-
-      text.focus();
-
-      resize();
-    }
-
-    init()
-  }, [])
+  });
 
   return (
     <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="addModal" tabIndex="-1" aria-labelledby="add-new-thread" aria-modal="true" role="dialog">
@@ -77,6 +47,7 @@ export default function AddModal({ title, titleChange, addHandler }) {
                 type="body"
                 id="body"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 overflow-hidden resize-none"
+                style = {{height: `${height}px`}}
                 placeholder="What Do You Think?"
                 value={body}
                 onChange={onBodyChange}
