@@ -160,7 +160,7 @@ export default (() => {
   }
 
   async function createComment({ id, content }) {
-    const response = await _fetchWithAuth(`${BASE_URL}/threads/${id}`,{
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${id}/comments`,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

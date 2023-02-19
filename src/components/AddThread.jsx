@@ -1,48 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import useInput from "../hooks/useInput";
 
 export default function AddThread({ titleChange }) {
   const [titleInput, onTitleInputChange] = useInput('');
-
-  useEffect(() => {
-    let observe;
-    if (window.attachEvent) {
-      observe = function (element, event, handler) {
-        element.attachEvent('on' + event, handler);
-      };
-    }
-    else {
-      observe = function (element, event, handler) {
-        element.addEventListener(event, handler, false);
-      };
-    }
-
-    function init() {
-      let text = document.getElementById('body');
-      function resize() {
-        text.style.height = 'auto';
-        if (text.scrollHeight < 80) {
-          text.style.height = '80px';
-        } else {
-          text.style.height = text.scrollHeight + 'px';
-        }
-      }
-      function delayedResize() {
-        window.setTimeout(resize, 0);
-      }
-      observe(text, 'change', resize);
-      observe(text, 'cut', delayedResize);
-      observe(text, 'paste', delayedResize);
-      observe(text, 'drop', delayedResize);
-      observe(text, 'keydown', delayedResize);
-
-      text.focus();
-
-      resize();
-    }
-
-    init()
-  }, [])
 
   return (
     <div className="w-full shadow-md bg-white rounded-lg pt-2 pb-2 flex">

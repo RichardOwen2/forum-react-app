@@ -7,7 +7,7 @@ export default function TrendingItem({ id, title, insight, upVotesBy, downVotesB
   const { avatar } = ownerProfile;
 
   return (
-    <Link to={'/'}>
+    <Link to={`/detail/${id}`}>
       <div className="m-3 p-3 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
         <div className="flex">
           <div className="min-w-fit mr-3">

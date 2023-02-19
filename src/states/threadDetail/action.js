@@ -91,9 +91,9 @@ function asyncReceiveThreadDetail(id) {
       const thread = await api.getDetailThreads(id);
       dispatch(receiveThreadDetailActionCreator(thread));
     } catch (error) {
-      alert(error);
+      dispatch(receiveThreadDetailActionCreator('Not Found'));
     }
-    dispatch(loading());
+    dispatch(hideLoading());
   }
 }
 
@@ -201,6 +201,7 @@ export {
   asyncUpVoteThreadDetail,
   asyncDownVoteThreadDetail,
   asyncDeleteVoteThreadDetail,
+  asyncAddCommentThread,
   asyncUpVoteCommentThread,
   asyncDownVoteCommentThread,
   asyncDeleteVoteCommentThread,

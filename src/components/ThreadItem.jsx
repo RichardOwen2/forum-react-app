@@ -11,7 +11,7 @@ export default function ThreadItem({
   const { avatar, name } = ownerProfile;
   return (
     <div className="w-full mb-5 shadow-md bg-white rounded-lg p-3">
-      <Link to={'/'}><h3 className="text-xl font-medium">{title}</h3></Link>
+      <Link to={`/detail/${id}`}><h3 className="text-xl font-medium">{title}</h3></Link>
       <div className="flex mt-3">
         <div className="flex">
           <div className="min-w-fit">
@@ -30,7 +30,7 @@ export default function ThreadItem({
         <p>{body.length < 650 ? body : (body.substring(0,600) + '...')}</p>
       </div>
       <div className="flex mt-3">
-        <Link to={'/'} className="flex items-center p-2 hover:bg-gray-100 rounded-lg">
+        <Link to={`/detail/${id}`} className="flex items-center p-2 hover:bg-gray-100 rounded-lg">
           <BsFillChatFill />
           <p className="ml-2">{totalComments}{' '}Replies</p>
         </Link>

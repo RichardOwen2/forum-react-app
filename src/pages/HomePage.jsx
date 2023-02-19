@@ -60,7 +60,11 @@ export default function HomePage() {
     if (authUser) {
       setHomeNav(condition);
     } else {
-      setHomeNav(true);
+      if (condition) {
+        setHomeNav(true);
+      } else {
+        navigate('/login')
+      }
     }
   }
 
@@ -78,6 +82,10 @@ export default function HomePage() {
     authUser,
   }))
 
+  const trendingThreadList = threadList.slice(0).sort((previous, current) => {
+    return current.insight > previous.insight ? 1 : -1;
+  }).slice(0, 3)
+
   let filteredThreadList
 
   if (homeNav) {
@@ -86,19 +94,17 @@ export default function HomePage() {
     })
   } else {
     filteredThreadList = threadList.slice(0).filter((thread) => {
-      return thread.title.toLowerCase().includes(keyword.toLowerCase())
-    }).filter((thread) => {
-      return thread.ownerId === authUser.id;
+      return thread.title.toLowerCase().includes(keyword.toLowerCase()) && thread.ownerId === authUser.id;
     })
   }
 
   return (
     <div className="bg-[#282c34]/10 min-h-screen">
       <HeaderApp user={authUser} signout={onSignOut} keyword={keyword} keywordChange={onKeywordChangeHandler}/>
-      <main className="">
+      <main>
         <aside className="w-[25%] pl-9 pr-7 pt-5 fixed">
           <NavBar nav={homeNav} navChange={onHomeNavChangeHandler}/>
-          <Trending threadList={threadList} />
+          <Trending threadList={trendingThreadList} />
           <LeaderBoards leaderboard={leaderboard} />
         </aside>
         <div className="ml-[25%] pt-5 pr-6 z-40">

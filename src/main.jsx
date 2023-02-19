@@ -6,7 +6,6 @@ import App from './App'
 import store from './states';
 
 import './styles/style.css'
-import 'flowbite';
 import 'tw-elements';
 
 ReactDOM.createRoot(document.getElementById('root')).render(

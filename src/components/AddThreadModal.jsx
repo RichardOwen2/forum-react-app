@@ -1,9 +1,51 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { BsFillChatFill } from 'react-icons/bs'
+import { MdCancel } from 'react-icons/md'
 import useInput from "../hooks/useInput";
 
 export default function AddModal({ title, titleChange, addHandler }) {
   const [body, onBodyChange] = useInput('')
   const [category, onCategoryChange] = useInput('');
+
+  useEffect(() => {
+    let observe;
+    if (window.attachEvent) {
+      observe = function (element, event, handler) {
+        element.attachEvent('on' + event, handler);
+      };
+    }
+    else {
+      observe = function (element, event, handler) {
+        element.addEventListener(event, handler, false);
+      };
+    }
+
+    function init() {
+      let text = document.getElementById('body');
+      function resize() {
+        text.style.height = 'auto';
+        if (text.scrollHeight < 80) {
+          text.style.height = '80px';
+        } else {
+          text.style.height = text.scrollHeight + 'px';
+        }
+      }
+      function delayedResize() {
+        window.setTimeout(resize, 0);
+      }
+      observe(text, 'change', resize);
+      observe(text, 'cut', delayedResize);
+      observe(text, 'paste', delayedResize);
+      observe(text, 'drop', delayedResize);
+      observe(text, 'keydown', delayedResize);
+
+      text.focus();
+
+      resize();
+    }
+
+    init()
+  }, [])
 
   return (
     <div className="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto" id="addModal" tabIndex="-1" aria-labelledby="add-new-thread" aria-modal="true" role="dialog">
@@ -54,18 +96,23 @@ export default function AddModal({ title, titleChange, addHandler }) {
           </div>
           <div
             className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-            <button type="button"
-              className="inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
-              data-bs-dismiss="modal">
-              Cancel
-            </button>
-            <button type="button"
-              className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1"
-              data-bs-dismiss="modal"
-              onClick={() => addHandler({ title, body, category })}
+            <div className="flex">
+              <button
+                className="flex items-center px-4 py-2 hover:bg-red-100 rounded-lg active:bg-red-300"
+                data-bs-dismiss="modal"
               >
-              Add Thread
-            </button>
+                <MdCancel />
+                <p className="ml-2">Cancel</p>
+              </button>
+              <button
+                className="flex items-center px-4 py-2 hover:bg-green-100 rounded-lg active:bg-green-300"
+                data-bs-dismiss="modal"
+                onClick={() => addHandler({ title, body, category })}
+              >
+                <BsFillChatFill />
+                <p className="ml-2">Add Thread</p>
+              </button>
+            </div>
           </div>
         </div>
       </div>
