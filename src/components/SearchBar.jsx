@@ -1,6 +1,7 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function SearchBar({ keyword, keywordChange }) {
+function SearchBar({ keyword, keywordChange }) {
   return (
     <div className="my-auto md:mr-5 mr-3">
       <input
@@ -13,3 +14,10 @@ export default function SearchBar({ keyword, keywordChange }) {
     </div>
   );
 }
+
+SearchBar.propTypes = {
+  keyword: PropTypes.string.isRequired,
+  keywordChange: PropTypes.func.isRequired,
+};
+
+export default SearchBar;

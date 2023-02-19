@@ -26,8 +26,8 @@ function upVoteThreadDetailActionCreator(vote) {
     type: ActionType.UP_VOTE_THREAD_DETAIL,
     payload: {
       vote,
-    }
-  }
+    },
+  };
 }
 
 function downVoteThreadDetailActionCreator(vote) {
@@ -35,8 +35,8 @@ function downVoteThreadDetailActionCreator(vote) {
     type: ActionType.DOWN_VOTE_THREAD_DETAIL,
     payload: {
       vote,
-    }
-  }
+    },
+  };
 }
 
 function deleteVoteThreadDetailActionCreator(vote) {
@@ -44,8 +44,8 @@ function deleteVoteThreadDetailActionCreator(vote) {
     type: ActionType.DELETE_VOTE_THREAD_DETAIL,
     payload: {
       vote,
-    }
-  }
+    },
+  };
 }
 
 function addCommentThread(comment) {
@@ -53,8 +53,8 @@ function addCommentThread(comment) {
     type: ActionType.ADD_COMMENT_THREAD,
     payload: {
       comment,
-    }
-  }
+    },
+  };
 }
 
 function upVoteComment(vote) {
@@ -62,8 +62,8 @@ function upVoteComment(vote) {
     type: ActionType.UP_VOTE_COMMENT,
     payload: {
       vote,
-    }
-  }
+    },
+  };
 }
 
 function downVoteComment(vote) {
@@ -71,8 +71,8 @@ function downVoteComment(vote) {
     type: ActionType.DOWN_VOTE_COMMENT,
     payload: {
       vote,
-    }
-  }
+    },
+  };
 }
 
 function deleteVoteComment(vote) {
@@ -80,8 +80,8 @@ function deleteVoteComment(vote) {
     type: ActionType.DELETE_VOTE_COMMENT,
     payload: {
       vote,
-    }
-  }
+    },
+  };
 }
 
 function asyncReceiveThreadDetail(id) {
@@ -94,7 +94,7 @@ function asyncReceiveThreadDetail(id) {
       dispatch(receiveThreadDetailActionCreator('Not Found'));
     }
     dispatch(hideLoading());
-  }
+  };
 }
 
 function asyncUpVoteThreadDetail(id) {
@@ -107,7 +107,7 @@ function asyncUpVoteThreadDetail(id) {
       alert(error.message);
     }
     dispatch(hideLoading());
-  }
+  };
 }
 
 function asyncDownVoteThreadDetail(id) {
@@ -120,7 +120,7 @@ function asyncDownVoteThreadDetail(id) {
       alert(error.message);
     }
     dispatch(hideLoading());
-  }
+  };
 }
 
 function asyncDeleteVoteThreadDetail(id) {
@@ -133,7 +133,7 @@ function asyncDeleteVoteThreadDetail(id) {
       alert(error.message);
     }
     dispatch(hideLoading());
-  }
+  };
 }
 
 function asyncAddCommentThread({ id, content }) {
@@ -146,7 +146,7 @@ function asyncAddCommentThread({ id, content }) {
       alert(error.message);
     }
     dispatch(hideLoading());
-  }
+  };
 }
 
 function asyncUpVoteCommentThread({ threadId, commentId }) {
@@ -159,7 +159,7 @@ function asyncUpVoteCommentThread({ threadId, commentId }) {
       alert(error.message);
     }
     dispatch(hideLoading());
-  }
+  };
 }
 
 function asyncDownVoteCommentThread({ threadId, commentId }) {
@@ -172,7 +172,7 @@ function asyncDownVoteCommentThread({ threadId, commentId }) {
       alert(error.message);
     }
     dispatch(hideLoading());
-  }
+  };
 }
 
 function asyncDeleteVoteCommentThread({ threadId, commentId }) {
@@ -185,7 +185,7 @@ function asyncDeleteVoteCommentThread({ threadId, commentId }) {
       alert(error.message);
     }
     dispatch(hideLoading());
-  }
+  };
 }
 
 export {
@@ -205,4 +205,4 @@ export {
   asyncUpVoteCommentThread,
   asyncDownVoteCommentThread,
   asyncDeleteVoteCommentThread,
-}
+};

@@ -1,10 +1,11 @@
-import React from "react";
-import useInput from "../hooks/useInput";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import { Link } from "react-router-dom";
-import BackButton from "./BackButton";
+import useInput from '../hooks/useInput';
+import BackButton from './BackButton';
 
-export default function RegisterInput({ register }) {
+function RegisterInput({ register }) {
   const [username, onChangeUsername] = useInput('');
   const [email, onEmailChange] = useInput('');
   const [password, onChangePassword] = useInput('');
@@ -41,7 +42,7 @@ export default function RegisterInput({ register }) {
           value={password}
         />
       </div>
-      <button onClick={() => register({ name:username, email, password })} className="bg-[#282c34] mt-1 py-2 px-10 text-white">Register</button>
+      <button type="button" onClick={() => register({ name: username, email, password })} className="bg-[#282c34] mt-1 py-2 px-10 text-white">Register</button>
       <p className="mt-4">
         Already have an account?
         {' '}
@@ -51,3 +52,9 @@ export default function RegisterInput({ register }) {
     </>
   );
 }
+
+RegisterInput.propTypes = {
+  register: PropTypes.func.isRequired,
+};
+
+export default RegisterInput;

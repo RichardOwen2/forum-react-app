@@ -1,4 +1,4 @@
-import { ActionType } from "./action";
+import { ActionType } from './action';
 
 function threadDetailReducer(threadDetail = null, action = {}) {
   switch (action.type) {
@@ -25,8 +25,8 @@ function threadDetailReducer(threadDetail = null, action = {}) {
     case ActionType.ADD_COMMENT_THREAD:
       return {
         ...threadDetail,
-        comments: [action.payload.comment, ...threadDetail.comments]
-      }
+        comments: [action.payload.comment, ...threadDetail.comments],
+      };
     case ActionType.UP_VOTE_COMMENT:
       return {
         ...threadDetail,
@@ -39,8 +39,8 @@ function threadDetailReducer(threadDetail = null, action = {}) {
             };
           }
           return comment;
-        })
-      }
+        }),
+      };
     case ActionType.DOWN_VOTE_COMMENT:
       return {
         ...threadDetail,
@@ -53,8 +53,8 @@ function threadDetailReducer(threadDetail = null, action = {}) {
             };
           }
           return comment;
-        })
-      }
+        }),
+      };
     case ActionType.DELETE_VOTE_COMMENT:
       return {
         ...threadDetail,
@@ -67,8 +67,8 @@ function threadDetailReducer(threadDetail = null, action = {}) {
             };
           }
           return comment;
-        })
-      }
+        }),
+      };
     default:
       return threadDetail;
   }

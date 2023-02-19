@@ -15,7 +15,7 @@ function addThreadActionCreator(thread) {
     payload: {
       thread,
     },
-  }
+  };
 }
 
 function receiveThreadsActionCreator(threads) {
@@ -24,7 +24,7 @@ function receiveThreadsActionCreator(threads) {
     payload: {
       threads,
     },
-  }
+  };
 }
 
 function upVoteThreadActionCreator(vote) {
@@ -32,8 +32,8 @@ function upVoteThreadActionCreator(vote) {
     type: ActionType.UP_VOTE_THREAD,
     payload: {
       vote,
-    }
-  }
+    },
+  };
 }
 
 function downVoteThreadActionCreator(vote) {
@@ -41,8 +41,8 @@ function downVoteThreadActionCreator(vote) {
     type: ActionType.DOWN_VOTE_THREAD,
     payload: {
       vote,
-    }
-  }
+    },
+  };
 }
 
 function deleteVoteThreadActionCreator(vote) {
@@ -50,8 +50,8 @@ function deleteVoteThreadActionCreator(vote) {
     type: ActionType.DELETE_VOTE_THREAD,
     payload: {
       vote,
-    }
-  }
+    },
+  };
 }
 
 function asyncAddThread({ title, body, category = '' }) {
@@ -64,7 +64,7 @@ function asyncAddThread({ title, body, category = '' }) {
       alert(error.message);
     }
     dispatch(hideLoading());
-  }
+  };
 }
 
 function asyncUpVoteThread(id) {
@@ -77,7 +77,7 @@ function asyncUpVoteThread(id) {
       alert(error.message);
     }
     dispatch(hideLoading());
-  }
+  };
 }
 
 function asyncDownVoteThread(id) {
@@ -90,7 +90,7 @@ function asyncDownVoteThread(id) {
       alert(error.message);
     }
     dispatch(hideLoading());
-  }
+  };
 }
 
 function asyncDeleteVoteThread(id) {
@@ -103,7 +103,7 @@ function asyncDeleteVoteThread(id) {
       alert(error.message);
     }
     dispatch(hideLoading());
-  }
+  };
 }
 
 export {
@@ -117,4 +117,4 @@ export {
   asyncUpVoteThread,
   asyncDownVoteThread,
   asyncDeleteVoteThread,
-}
+};

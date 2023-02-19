@@ -1,29 +1,30 @@
-import React from "react";
-import { FaAngleUp } from 'react-icons/fa';
-import { FaAngleDown } from 'react-icons/fa';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { FaAngleUp, FaAngleDown } from 'react-icons/fa';
 
-export default function VoteButton({ id, upVotes, downVotes, authUser, handler, display = false }) {
-  if (upVotes === undefined || downVotes === undefined) {
-    return null;
-  }
-
+function VoteButton({
+  id, upVotes, downVotes, authUser, handler, display,
+}) {
   const vote = (user) => {
     const up = upVotes.includes(user);
     const down = downVotes.includes(user);
 
     if (up) {
       return 1;
-    } else if (down) {
-      return -1;
-    } else {
-      return 0;
     }
+
+    if (down) {
+      return -1;
+    }
+
+    return 0;
   };
 
   if (authUser === null) {
     return (
       <>
         <button
+          type="button"
           className="flex items-center px-1 hover:bg-gray-100 rounded-lg active:bg-gray-300"
           onClick={() => handler.needAuth()}
         >
@@ -31,6 +32,7 @@ export default function VoteButton({ id, upVotes, downVotes, authUser, handler, 
           <p>{upVotes.length}</p>
         </button>
         <button
+          type="button"
           className="flex items-center px-1 hover:bg-gray-100 rounded-lg active:bg-gray-300"
           onClick={() => handler.needAuth()}
         >
@@ -59,13 +61,14 @@ export default function VoteButton({ id, upVotes, downVotes, authUser, handler, 
           <p>{downVotes.length}</p>
         </div>
       </>
-    )
+    );
   }
 
   if (authUserVote === 1) {
     return (
       <>
         <button
+          type="button"
           className="flex items-center px-1 hover:bg-gray-100 rounded-lg active:bg-gray-300"
           onClick={(e) => handler.delete(e, id)}
         >
@@ -73,6 +76,7 @@ export default function VoteButton({ id, upVotes, downVotes, authUser, handler, 
           <p>{upVotes.length}</p>
         </button>
         <button
+          type="button"
           className="flex items-center px-1 hover:bg-gray-100 rounded-lg active:bg-gray-300"
           onClick={(e) => handler.down(e, id)}
         >
@@ -87,6 +91,7 @@ export default function VoteButton({ id, upVotes, downVotes, authUser, handler, 
     return (
       <>
         <button
+          type="button"
           className="flex items-center px-1 hover:bg-gray-100 rounded-lg active:bg-gray-300"
           onClick={(e) => handler.up(e, id)}
         >
@@ -94,6 +99,7 @@ export default function VoteButton({ id, upVotes, downVotes, authUser, handler, 
           <p>{upVotes.length}</p>
         </button>
         <button
+          type="button"
           className="flex items-center px-1 hover:bg-gray-100 rounded-lg active:bg-gray-300"
           onClick={(e) => handler.delete(e, id)}
         >
@@ -107,6 +113,7 @@ export default function VoteButton({ id, upVotes, downVotes, authUser, handler, 
   return (
     <>
       <button
+        type="button"
         className="flex items-center px-1 hover:bg-gray-100 rounded-lg active:bg-gray-300"
         onClick={(e) => handler.up(e, id)}
       >
@@ -114,6 +121,7 @@ export default function VoteButton({ id, upVotes, downVotes, authUser, handler, 
         <p>{upVotes.length}</p>
       </button>
       <button
+        type="button"
         className="flex items-center px-1 hover:bg-gray-100 rounded-lg active:bg-gray-300"
         onClick={(e) => handler.down(e, id)}
       >
@@ -123,3 +131,29 @@ export default function VoteButton({ id, upVotes, downVotes, authUser, handler, 
     </>
   );
 }
+
+VoteButton.propTypes = {
+  id: PropTypes.string.isRequired,
+  upVotes: PropTypes.array.isRequired,
+  downVotes: PropTypes.array.isRequired,
+  authUser: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+  }),
+  handler: PropTypes.shape({
+    up: PropTypes.func.isRequired,
+    down: PropTypes.func.isRequired,
+    delete: PropTypes.func.isRequired,
+    needAuth: PropTypes.func.isRequired,
+  }),
+  display: PropTypes.bool,
+};
+
+VoteButton.defaultProps = {
+  display: false,
+  authUser: null,
+  handler: null,
+};
+
+export default VoteButton;

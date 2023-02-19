@@ -1,6 +1,14 @@
 export default (() => {
   const BASE_URL = 'https://forum-api.dicoding.dev/v1';
 
+  function putAccessToken(token) {
+    localStorage.setItem('accessToken', token);
+  }
+
+  function getAccessToken() {
+    return localStorage.getItem('accessToken');
+  }
+
   async function _fetchWithAuth(url, options = {}) {
     return fetch(url, {
       ...options,
@@ -9,14 +17,6 @@ export default (() => {
         Authorization: `Bearer ${getAccessToken()}`,
       },
     });
-  }
-
-  function putAccessToken(token) {
-    localStorage.setItem('accessToken', token);
-  }
-
-  function getAccessToken() {
-    return localStorage.getItem('accessToken');
   }
 
   async function register({ name, email, password }) {
@@ -112,7 +112,7 @@ export default (() => {
         body,
         category,
       }),
-    })
+    });
 
     const responseJson = await response.json();
 
@@ -160,7 +160,7 @@ export default (() => {
   }
 
   async function createComment({ id, content }) {
-    const response = await _fetchWithAuth(`${BASE_URL}/threads/${id}/comments`,{
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${id}/comments`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

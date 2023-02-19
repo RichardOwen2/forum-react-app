@@ -1,7 +1,7 @@
-import { ActionType } from "./action";
+import { ActionType } from './action';
 
-function threadsReducer(threads = [], action= {}) {
-  switch(action.type) {
+function threadsReducer(threads = [], action = {}) {
+  switch (action.type) {
     case ActionType.ADD_THREAD:
       return [action.payload.thread, ...threads];
     case ActionType.RECEIVE_THREADS:

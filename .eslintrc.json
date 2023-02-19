@@ -6,8 +6,7 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "airbnb",
-        "react-app"
+        "airbnb"
     ],
     "overrides": [
     ],
@@ -16,17 +15,15 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react",
-        "react-hooks"
+        "react"
     ],
     "rules": {
         "linebreak-style": "off",
         "no-alert": "off",
         "no-underscore-dangle": "off",
-        "import/prefer-default-export": "off",
-        "react/jsx-filename-extension": "off",
-        "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn",
-        "react/jsx-props-no-spreading": "off"
+        "no-shadow": "off",
+        "react/jsx-props-no-spreading": "off",
+        "react/forbid-prop-types": "off",
+        "jsx-a11y/label-has-associated-control": "off"
     }
 }

@@ -1,9 +1,10 @@
-import React from "react";
-import useInput from "../hooks/useInput";
-
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-export default function LoginInput({ login }) {
+import useInput from '../hooks/useInput';
+
+function LoginInput({ login }) {
   const [email, onEmailChange] = useInput('');
   const [password, onChangePassword] = useInput('');
 
@@ -29,7 +30,7 @@ export default function LoginInput({ login }) {
           value={password}
         />
       </div>
-      <button onClick={() => login({ email, password })} className="bg-[#282c34] mt-1 py-2 px-10 text-white">Login</button>
+      <button type="button" onClick={() => login({ email, password })} className="bg-[#282c34] mt-1 py-2 px-10 text-white">Login</button>
       <p className="mt-4">
         Don&apos;t have an account?
         {' '}
@@ -38,3 +39,9 @@ export default function LoginInput({ login }) {
     </>
   );
 }
+
+LoginInput.propTypes = {
+  login: PropTypes.func.isRequired,
+};
+
+export default LoginInput;

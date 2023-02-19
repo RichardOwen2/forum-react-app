@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
-import HeaderApp from "../components/HeaderApp";
-import ThreadDetail from "../components/ThreadDetail";
-import CommentInput from "../components/CommentInput";
-import CommentList from "../components/CommentList";
+import HeaderApp from '../components/HeaderApp';
+import ThreadDetail from '../components/ThreadDetail';
+import CommentInput from '../components/CommentInput';
+import CommentList from '../components/CommentList';
 
 import {
   asyncReceiveThreadDetail,
@@ -16,7 +16,9 @@ import {
   asyncUpVoteCommentThread,
   asyncDownVoteCommentThread,
   asyncDeleteVoteCommentThread,
-} from "../states/threadDetail/action"
+} from '../states/threadDetail/action';
+
+import { asyncUnsetAuthUser } from '../states/authUser/action';
 
 export default function DetailPage() {
   const {
@@ -30,21 +32,30 @@ export default function DetailPage() {
 
   useEffect(() => {
     dispatch(asyncReceiveThreadDetail(id));
-  }, [dispatch])
+  }, [dispatch]);
 
   const voteThreadHandler = {
-    up: (e, id) => { e.stopPropagation(); dispatch(asyncUpVoteThreadDetail(id)) },
-    down: (e, id) => { e.stopPropagation(); dispatch(asyncDownVoteThreadDetail(id)) },
-    delete: (e, id) => { e.stopPropagation(); dispatch(asyncDeleteVoteThreadDetail(id)) },
-    needAuth: () => { navigate('/login') },
-  }
+    up: (e, id) => { e.stopPropagation(); dispatch(asyncUpVoteThreadDetail(id)); },
+    down: (e, id) => { e.stopPropagation(); dispatch(asyncDownVoteThreadDetail(id)); },
+    delete: (e, id) => { e.stopPropagation(); dispatch(asyncDeleteVoteThreadDetail(id)); },
+    needAuth: () => { navigate('/login'); },
+  };
 
   const voteCommentHandler = {
-    up: (e, commentId) => { e.stopPropagation(); dispatch(asyncUpVoteCommentThread({ threadId: id, commentId })) },
-    down: (e, commentId) => { e.stopPropagation(); dispatch(asyncDownVoteCommentThread({ threadId: id, commentId })) },
-    delete: (e, commentId) => { e.stopPropagation(); dispatch(asyncDeleteVoteCommentThread({ threadId: id, commentId })) },
-    needAuth: () => { navigate('/login') },
-  }
+    up: (e, commentId) => {
+      e.stopPropagation();
+      dispatch(asyncUpVoteCommentThread({ threadId: id, commentId }));
+    },
+    down: (e, commentId) => {
+      e.stopPropagation();
+      dispatch(asyncDownVoteCommentThread({ threadId: id, commentId }));
+    },
+    delete: (e, commentId) => {
+      e.stopPropagation();
+      dispatch(asyncDeleteVoteCommentThread({ threadId: id, commentId }));
+    },
+    needAuth: () => { navigate('/login'); },
+  };
 
   const onSignOut = () => {
     dispatch(asyncUnsetAuthUser());
@@ -52,14 +63,14 @@ export default function DetailPage() {
 
   const addComment = ({ content }) => {
     dispatch(asyncAddCommentThread({ id, content }));
-  }
+  };
 
   if (!threadDetail) {
     return null;
   }
 
   if (threadDetail === 'Not Found') {
-    navigate('/NotFound')
+    navigate('/NotFound');
   }
 
   return (
@@ -67,10 +78,14 @@ export default function DetailPage() {
       <HeaderApp user={authUser} signout={onSignOut} />
       <main className="md:mx-[15%] p-8 bg-white min-h-screen shadow-md">
         <ThreadDetail voteHandler={voteThreadHandler} authUser={authUser} {...threadDetail} />
-        <hr className="h-px my-6 bg-gray-700 border-0"></hr>
+        <hr className="h-px my-6 bg-gray-700 border-0" />
         <CommentInput authUser={authUser} addComment={addComment} />
-        <hr className="h-px mb-6 mt-3 bg-gray-700 border-0"></hr>
-        <CommentList comments={threadDetail.comments} authUser={authUser} voteHandler={voteCommentHandler} />
+        <hr className="h-px mb-6 mt-3 bg-gray-700 border-0" />
+        <CommentList
+          comments={threadDetail.comments}
+          authUser={authUser}
+          voteHandler={voteCommentHandler}
+        />
       </main>
     </div>
   );

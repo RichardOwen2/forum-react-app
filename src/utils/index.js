@@ -19,4 +19,5 @@ function postedAt(date) {
   return 'just now';
 }
 
+// eslint-disable-next-line import/prefer-default-export
 export { postedAt };

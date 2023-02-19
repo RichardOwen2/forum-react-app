@@ -24,11 +24,11 @@ function asyncReceiveLeaderboards() {
       alert(error.message);
     }
     dispatch(hideLoading);
-  }
+  };
 }
 
 export {
   ActionType,
   receiveLeaderboardsActionCreator,
-  asyncReceiveLeaderboards
+  asyncReceiveLeaderboards,
 };
