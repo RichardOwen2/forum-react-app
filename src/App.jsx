@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { asyncPreloadProcess } from './states/isPreload/action';
 
 import LoginPage from './pages/LoginPage';
-import HomePage from "./pages/HomePage";
-import DetailPage from "./pages/DetailPage";
-import RegisterPage from "./pages/RegisterPage";
-import NotFoundPage from "./pages/NotFoundPage";
+import HomePage from './pages/HomePage';
+import DetailPage from './pages/DetailPage';
+import RegisterPage from './pages/RegisterPage';
+import NotFoundPage from './pages/NotFoundPage';
 
-import Loading from "./components/Loading";
+import Loading from './components/Loading';
 
 function App() {
   const {

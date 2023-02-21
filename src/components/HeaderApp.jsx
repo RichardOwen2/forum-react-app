@@ -12,7 +12,7 @@ function HeaderApp({
   const { pathname } = useLocation();
 
   return (
-    <header className="sticky top-0 z-50">
+    <header className="sticky top-0">
       <div className="flex-1 bg-[#282c34]">
         <div className="flex">
           <Link to="/" className="flex">

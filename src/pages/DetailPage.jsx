@@ -64,7 +64,7 @@ export default function DetailPage() {
   };
 
   const addComment = ({ content }) => {
-    dispatch(asyncAddCommentThread({ id, content }));
+    dispatch(asyncAddCommentThread({ threadId: id, content }));
   };
 
   if (!threadDetailData) {
