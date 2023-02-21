@@ -30,6 +30,8 @@ export default function DetailPage() {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  const threadDetailData = threadDetail.present;
+
   useEffect(() => {
     dispatch(asyncReceiveThreadDetail(id));
   }, [dispatch]);
@@ -65,11 +67,11 @@ export default function DetailPage() {
     dispatch(asyncAddCommentThread({ id, content }));
   };
 
-  if (!threadDetail) {
+  if (!threadDetailData) {
     return null;
   }
 
-  if (threadDetail === 'Not Found') {
+  if (threadDetailData === 'Not Found') {
     navigate('/NotFound');
   }
 
@@ -77,12 +79,12 @@ export default function DetailPage() {
     <div className="bg-[#282c34]/10 min-h-screen">
       <HeaderApp user={authUser} signout={onSignOut} />
       <main className="md:mx-[15%] p-8 bg-white min-h-screen shadow-md">
-        <ThreadDetail voteHandler={voteThreadHandler} authUser={authUser} {...threadDetail} />
+        <ThreadDetail voteHandler={voteThreadHandler} authUser={authUser} {...threadDetailData} />
         <hr className="h-px my-6 bg-gray-700 border-0" />
         <CommentInput authUser={authUser} addComment={addComment} />
         <hr className="h-px mb-6 mt-3 bg-gray-700 border-0" />
         <CommentList
-          comments={threadDetail.comments}
+          comments={threadDetailData.comments}
           authUser={authUser}
           voteHandler={voteCommentHandler}
         />
