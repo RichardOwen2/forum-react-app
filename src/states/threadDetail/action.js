@@ -1,3 +1,4 @@
+import { ActionCreators } from 'redux-undo';
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
 
@@ -97,50 +98,56 @@ function asyncReceiveThreadDetail(id) {
   };
 }
 
-function asyncUpVoteThreadDetail(id) {
-  return async (dispatch) => {
+function asyncUpVoteThreadDetail(threadId) {
+  return async (dispatch, getState) => {
     dispatch(showLoading());
+    const { authUser: { id } } = getState();
+    dispatch(upVoteThreadDetailActionCreator({ threadId, userId: id }));
     try {
-      const vote = await api.upVoteThread(id);
-      dispatch(upVoteThreadDetailActionCreator(vote));
+      await api.upVoteThread(threadId);
     } catch (error) {
       alert(error.message);
+      dispatch(ActionCreators.jump(-1, { name: 'THREADS_DETAIL' }));
     }
     dispatch(hideLoading());
   };
 }
 
-function asyncDownVoteThreadDetail(id) {
-  return async (dispatch) => {
+function asyncDownVoteThreadDetail(threadId) {
+  return async (dispatch, getState) => {
     dispatch(showLoading());
+    const { authUser: { id } } = getState();
+    dispatch(downVoteThreadDetailActionCreator({ threadId, userId: id }));
     try {
-      const vote = await api.downVoteThread(id);
-      dispatch(downVoteThreadDetailActionCreator(vote));
+      await api.downVoteThread(threadId);
     } catch (error) {
       alert(error.message);
+      dispatch(ActionCreators.jump(-1, { name: 'THREADS_DETAIL' }));
     }
     dispatch(hideLoading());
   };
 }
 
-function asyncDeleteVoteThreadDetail(id) {
-  return async (dispatch) => {
+function asyncDeleteVoteThreadDetail(threadId) {
+  return async (dispatch, getState) => {
     dispatch(showLoading());
+    const { authUser: { id } } = getState();
+    dispatch(deleteVoteThreadDetailActionCreator({ threadId, userId: id }));
     try {
-      const vote = await api.neutralVoteThread(id);
-      dispatch(deleteVoteThreadDetailActionCreator(vote));
+      await api.neutralVoteThread(id);
     } catch (error) {
       alert(error.message);
+      dispatch(ActionCreators.jump(-1, { name: 'THREADS_DETAIL' }));
     }
     dispatch(hideLoading());
   };
 }
 
-function asyncAddCommentThread({ id, content }) {
+function asyncAddCommentThread({ threadId, content }) {
   return async (dispatch) => {
     dispatch(showLoading());
     try {
-      const comment = await api.createComment({ id, content });
+      const comment = await api.createComment({ id: threadId, content });
       dispatch(addCommentThread(comment));
     } catch (error) {
       alert(error.message);
@@ -150,39 +157,45 @@ function asyncAddCommentThread({ id, content }) {
 }
 
 function asyncUpVoteCommentThread({ threadId, commentId }) {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     dispatch(showLoading());
+    const { authUser: { id } } = getState();
+    dispatch(upVoteComment({ userId: id, commentId }));
     try {
-      const vote = await api.upVoteComment({ threadId, commentId });
-      dispatch(upVoteComment(vote));
+      await api.upVoteComment({ threadId, commentId });
     } catch (error) {
       alert(error.message);
+      dispatch(ActionCreators.jump(-1, { name: 'THREADS_DETAIL' }));
     }
     dispatch(hideLoading());
   };
 }
 
 function asyncDownVoteCommentThread({ threadId, commentId }) {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     dispatch(showLoading());
+    const { authUser: { id } } = getState();
+    dispatch(downVoteComment({ userId: id, commentId }));
     try {
-      const vote = await api.downVoteComment({ threadId, commentId });
-      dispatch(downVoteComment(vote));
+      await api.downVoteComment({ threadId, commentId });
     } catch (error) {
       alert(error.message);
+      dispatch(ActionCreators.jump(-1, { name: 'THREADS_DETAIL' }));
     }
     dispatch(hideLoading());
   };
 }
 
 function asyncDeleteVoteCommentThread({ threadId, commentId }) {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     dispatch(showLoading());
+    const { authUser: { id } } = getState();
+    dispatch(deleteVoteComment({ userId: id, commentId }));
     try {
-      const vote = await api.neutralVoteComment({ threadId, commentId });
-      dispatch(deleteVoteComment(vote));
+      await api.neutralVoteComment({ threadId, commentId });
     } catch (error) {
       alert(error.message);
+      dispatch(ActionCreators.jump(-1, { name: 'THREADS_DETAIL' }));
     }
     dispatch(hideLoading());
   };

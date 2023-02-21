@@ -1,3 +1,4 @@
+import { ActionCreators } from 'redux-undo';
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
 
@@ -67,40 +68,46 @@ function asyncAddThread({ title, body, category = '' }) {
   };
 }
 
-function asyncUpVoteThread(id) {
-  return async (dispatch) => {
+function asyncUpVoteThread(threadId) {
+  return async (dispatch, getState) => {
     dispatch(showLoading());
+    const { authUser: { id } } = getState();
+    dispatch(upVoteThreadActionCreator({ threadId, userId: id }));
     try {
-      const vote = await api.upVoteThread(id);
-      dispatch(upVoteThreadActionCreator(vote));
+      await api.upVoteThread(threadId);
     } catch (error) {
       alert(error.message);
+      dispatch(ActionCreators.jump(-1, { name: 'THREADS' }));
     }
     dispatch(hideLoading());
   };
 }
 
-function asyncDownVoteThread(id) {
-  return async (dispatch) => {
+function asyncDownVoteThread(threadId) {
+  return async (dispatch, getState) => {
     dispatch(showLoading());
+    const { authUser: { id } } = getState();
+    dispatch(downVoteThreadActionCreator({ threadId, userId: id }));
     try {
-      const vote = await api.downVoteThread(id);
-      dispatch(downVoteThreadActionCreator(vote));
+      await api.downVoteThread(threadId);
     } catch (error) {
       alert(error.message);
+      dispatch(ActionCreators.jump(-1, { name: 'THREADS' }));
     }
     dispatch(hideLoading());
   };
 }
 
-function asyncDeleteVoteThread(id) {
-  return async (dispatch) => {
+function asyncDeleteVoteThread(threadId) {
+  return async (dispatch, getState) => {
     dispatch(showLoading());
+    const { authUser: { id } } = getState();
+    dispatch(deleteVoteThreadActionCreator({ threadId, userId: id }));
     try {
-      const vote = await api.neutralVoteThread(id);
-      dispatch(deleteVoteThreadActionCreator(vote));
+      await api.neutralVoteThread(threadId);
     } catch (error) {
       alert(error.message);
+      dispatch(ActionCreators.jump(-1, { name: 'THREADS' }));
     }
     dispatch(hideLoading());
   };

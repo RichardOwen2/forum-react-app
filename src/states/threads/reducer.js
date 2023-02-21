@@ -1,3 +1,4 @@
+import undoable from 'redux-undo';
 import { ActionType } from './action';
 
 function threadsReducer(threads = [], action = {}) {
@@ -44,4 +45,4 @@ function threadsReducer(threads = [], action = {}) {
   }
 }
 
-export default threadsReducer;
+export default undoable(threadsReducer, { name: 'THREADS' });

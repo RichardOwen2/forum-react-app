@@ -20,6 +20,7 @@
     "react-redux": "^8.0.5",
     "react-redux-loading-bar": "^5.0.4",
     "react-router-dom": "^6.8.1",
+    "redux-undo": "^1.0.1",
     "tw-elements": "^1.0.0-alpha13"
   },
   "devDependencies": {

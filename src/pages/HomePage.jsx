@@ -82,7 +82,7 @@ export default function HomePage() {
     needAuth: () => { navigate('/login'); },
   };
 
-  const threadList = threads.map((thread) => ({
+  const threadList = threads.present.map((thread) => ({
     ...thread,
     ownerProfile: users.find((user) => user.id === thread.ownerId),
     insight: thread.upVotesBy.length + thread.downVotesBy.length + thread.totalComments,
