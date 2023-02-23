@@ -12,7 +12,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onLogin = async ({ username, email, password }) => {
+  const onLogin = ({ username, email, password }) => {
     dispatch(asyncSetAuthUser({ username, email, password })).then(() => {
       navigate('/');
     }).catch((error) => {

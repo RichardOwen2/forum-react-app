@@ -11,7 +11,7 @@ export default function RegisterPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onRegister = async ({ name, email, password }) => {
+  const onRegister = ({ name, email, password }) => {
     dispatch(asyncRegisterUser({ name, email, password })).then((message) => {
       alert(message);
       navigate('/login');
