@@ -11,9 +11,13 @@ export default function RegisterPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onRegister = ({ name, email, password }) => {
-    dispatch(asyncRegisterUser({ name, email, password }));
-    navigate('/login');
+  const onRegister = async ({ name, email, password }) => {
+    dispatch(asyncRegisterUser({ name, email, password })).then((message) => {
+      alert(message);
+      navigate('/login');
+    }).catch((error) => {
+      alert(error);
+    });
   };
 
   return (

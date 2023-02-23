@@ -33,10 +33,13 @@ function asyncSetAuthUser({ email, password }) {
       const authUser = await api.getOwnProfile();
 
       dispatch(setAuthUserActionCreator(authUser));
+
+      return Promise.resolve('berhasil login');
     } catch (error) {
-      alert(error.message);
+      return Promise.reject(error.message);
+    } finally {
+      dispatch(hideLoading());
     }
-    dispatch(hideLoading());
   };
 }
 

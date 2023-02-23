@@ -19,11 +19,13 @@ function asyncRegisterUser({ name, email, password }) {
     dispatch(showLoading());
     try {
       await api.register({ name, email, password });
-      alert('Selamat anda berhasil registrasi');
+
+      return Promise.resolve('Selamat anda berhasil registrasi');
     } catch (error) {
-      alert(error.message);
+      return Promise.reject(error.message);
+    } finally {
+      dispatch(hideLoading());
     }
-    dispatch(hideLoading());
   };
 }
 
