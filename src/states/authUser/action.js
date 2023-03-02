@@ -18,9 +18,6 @@ function setAuthUserActionCreator(authUser) {
 function unsetAuthUserActionCreator() {
   return {
     type: ActionType.UNSET_AUTH_USER,
-    payload: {
-      authUser: null,
-    },
   };
 }
 

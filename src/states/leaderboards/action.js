@@ -16,14 +16,14 @@ function receiveLeaderboardsActionCreator(leaderboards) {
 
 function asyncReceiveLeaderboards() {
   return async (dispatch) => {
-    dispatch(showLoading);
+    dispatch(showLoading());
     try {
       const leaderboards = await api.getLeaderboards();
       dispatch(receiveLeaderboardsActionCreator(leaderboards));
     } catch (error) {
       alert(error.message);
     }
-    dispatch(hideLoading);
+    dispatch(hideLoading());
   };
 }
 

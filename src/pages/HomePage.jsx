@@ -89,6 +89,8 @@ export default function HomePage() {
     authUser,
   }));
 
+  console.log(threadList)
+
   // eslint-disable-next-line arrow-body-style
   const trendingThreadList = threadList.slice(0).sort((previous, current) => {
     return current.insight > previous.insight ? 1 : -1;
