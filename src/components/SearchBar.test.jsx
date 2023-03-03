@@ -1,5 +1,4 @@
 import React from 'react';
-import useInput from '../hooks/useInput';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import SearchBar from './SearchBar';

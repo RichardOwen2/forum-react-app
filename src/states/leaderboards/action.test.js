@@ -8,21 +8,21 @@ import {
 const fakeLeaderboardsResponse = [
   {
     user: {
-      id: "users-1",
-      name: "John Doe",
-      email: "john@example.com",
-      avatar: "https://generated-image-url.jpg"
+      id: 'users-1',
+      name: 'John Doe',
+      email: 'john@example.com',
+      avatar: 'https://generated-image-url.jpg',
     },
-    score: 10
+    score: 10,
   },
   {
     user: {
-      id: "users-2",
-      name: "Jane Doe",
-      email: "jane@example.com",
-      avatar: "https://generated-image-url.jpg"
+      id: 'users-2',
+      name: 'Jane Doe',
+      email: 'jane@example.com',
+      avatar: 'https://generated-image-url.jpg',
     },
-    score: 5
+    score: 5,
   },
 ];
 

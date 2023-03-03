@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
 import { IsEmpty, Map } from 'react-lodash';
 import PropTypes from 'prop-types';
@@ -8,11 +9,16 @@ function ThreadLists({ threadList, voteHandler }) {
     <div className="mt-6">
       <IsEmpty
         value={threadList}
-        yes={() => (<p className="text-center lg:pb-4 pb-20">Nothing Here...</p>)}
+        yes={() => (
+          <p className="text-center lg:pb-4 pb-20">Nothing Here...</p>
+        )}
         no={() => (
-          <Map collection={threadList} iteratee={(thread) => (
-            <ThreadItem key={thread.id} {...thread} voteHandler={voteHandler} />
-          )}>
+          <Map
+            collection={threadList}
+            iteratee={(thread) => (
+              <ThreadItem key={thread.id} {...thread} voteHandler={voteHandler} />
+            )}
+          >
             {(mappedList) => (
               <>
                 {mappedList}

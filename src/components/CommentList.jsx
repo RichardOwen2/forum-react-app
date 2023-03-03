@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
 import { IsEmpty, Map } from 'react-lodash';
 import PropTypes from 'prop-types';
@@ -13,14 +14,17 @@ function CommentList({ comments, authUser, voteHandler }) {
         </div>
       )}
       no={() => (
-        <Map collection={comments} iteratee={(comment) => (
-          <CommentItem
-            key={comment.id}
-            voteHandler={voteHandler}
-            authUser={authUser}
-            {...comment}
-          />
-        )}>
+        <Map
+          collection={comments}
+          iteratee={(comment) => (
+            <CommentItem
+              key={comment.id}
+              voteHandler={voteHandler}
+              authUser={authUser}
+              {...comment}
+            />
+          )}
+        >
           {(mappedList) => (
             <div className="m-2">
               {mappedList}
@@ -32,36 +36,6 @@ function CommentList({ comments, authUser, voteHandler }) {
       )}
     />
   );
-
-  // if (!comments || comments.length === 0) {
-  //   return (
-  //     <div className="mt-6">
-  //       <p className="text-center">Nothing Here...</p>
-  //     </div>
-  //   );
-  // }
-
-  // return (
-  //   <div className="m-2">
-  //     <p className="text-xl mb-7">
-  //       {comments.length}
-  //       {' '}
-  //       Replies...
-  //     </p>
-  //     {
-  //       comments.map((comment) => (
-  //         <CommentItem
-  //           key={comment.id}
-  //           voteHandler={voteHandler}
-  //           authUser={authUser}
-  //           {...comment}
-  //         />
-  //       ))
-  //     }
-  //     <hr className="h-px my-2 bg-gray-700 border-0" />
-  //     <p className="text-center mt-4">End Of Comment Section...</p>
-  //   </div>
-  // );
 }
 
 CommentList.propTypes = {

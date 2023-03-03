@@ -7,10 +7,10 @@ import {
 } from './action';
 
 const fakeProfileResponse = {
-  id: "id",
-  name: "name",
-  email: "email",
-  avatar: "avatar",
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  avatar: 'avatar',
 };
 
 const fakeErrorResponse = new Error('Ups, something went wrong');
@@ -50,4 +50,4 @@ describe('setAuthUserActionCreator thunk', () => {
     expect(dispatch).toHaveBeenCalledWith(setIsPreloadActionCreator(false));
     expect(dispatch).toHaveBeenCalledWith(hideLoading());
   });
-})
+});
