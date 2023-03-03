@@ -27,7 +27,7 @@ export default function RegisterPage() {
       </div>
       <div className="lg:min-h-[100vh] lg:p-16 md:p-12 flex flex-1 flex-col justify-center">
         <h1 className="font-bold text-5xl">Forum React App</h1>
-        <p className="mt-1">React is beautiful</p>
+        <p className="mt-1">React is beautiful 010</p>
         <RegisterInput register={onRegister} />
       </div>
     </div>
