@@ -5,7 +5,7 @@ import { receiveUsersActionCreator } from '../users/action';
 
 function asyncPopulateUsersAndThreads() {
   return async (dispatch) => {
-    dispatch("dont know");
+    dispatch("dawdawdwadawdwad");
   };
 }
 
