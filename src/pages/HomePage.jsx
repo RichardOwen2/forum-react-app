@@ -103,12 +103,7 @@ export default function HomePage() {
       || category.toLowerCase().includes(keyword.toLowerCase());
     });
   } else {
-    filteredThreadList = threadList.slice(0).filter((thread) => {
-      const { title, category } = thread;
-      return (title.toLowerCase().includes(keyword.toLowerCase())
-      || category.toLowerCase().includes(keyword.toLowerCase()))
-      && thread.ownerId === authUser.id;
-    });
+    filteredThreadList = null;
   }
 
   return (
