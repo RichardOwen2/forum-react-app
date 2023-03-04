@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "serve": "http-server dist",
+    "serve": "http-server dist -c-1",
     "test": "react-scripts test",
     "e2e": "cypress run",
     "lint": "eslint ./",
