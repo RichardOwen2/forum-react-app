@@ -1,3 +1,9 @@
+/** 
+ * - usersReducer function
+ *  - should return the initial state when given by unknown action
+ *  - should return the users when given by RECEIVE_USERS action
+*/
+
 import usersReducer from './reducer';
 
 describe('leaderboardReducers function', () => {

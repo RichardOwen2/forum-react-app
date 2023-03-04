@@ -1,3 +1,13 @@
+/**
+ * - Login spec
+ *   - should display Home page and Login button correctly
+ *   - should display Login page correctly when login button clicked at Home page
+ *   - should display alert when email is empty
+ *   - should display alert when password is empty
+ *   - should display alert when email and password are wrong
+ *   - should display homepage when username and password are correct
+ */
+
 describe('Login spec', () => {
   const email = 'kucing@ayam.com';
   const password = 'kucingayam';

@@ -1,3 +1,10 @@
+/** 
+ * - leaderboardReducer function
+ *  - should return the initial state when given by unknown action
+ *  - should return the leaderboards when given by GET_LEADERBOARDS action
+*/
+
+
 import leaderboardReducer from './reducer';
 
 describe('leaderboardReducers function', () => {

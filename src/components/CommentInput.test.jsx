@@ -1,3 +1,10 @@
+/**
+ * - CommentInput Specs
+ *   - should show login status when user not logged yet
+ *   - should handle content typing correctly
+ *   - should call addComment function when addComment button is clicked
+ */
+
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';

@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.svg';
 
 export default function NotFoundPage() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setTimeout(() => {
+      navigate('/');
+    }, 3000);
+  }, []);
+
   return (
     <div className="bg-[#282c34] min-h-[100vh] flex justify-center items-center">
       <img src={logo} className="App-logo w-[25%]" alt="logo" />

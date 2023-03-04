@@ -1,3 +1,10 @@
+/** 
+ * - isPreloadReducer function
+ *  - should return the initial state when given by unknown action
+ *  - should return the isPreload when given by SET_IS_PRELOAD action
+*/
+
+
 import isPreloadReducer from './reducer';
 
 describe('isPerloadReducers function', () => {

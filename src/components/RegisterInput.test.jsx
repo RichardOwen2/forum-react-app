@@ -1,3 +1,11 @@
+/**
+ * - RegisterInput Specs
+ *   - should handle username typing correctly
+ *   - should handle email typing correctly
+ *   - should handle password typing correctly
+ *   - should call Register function when register button is clicked
+ */
+
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
@@ -7,7 +15,7 @@ import Register from './RegisterInput';
 import '@testing-library/jest-dom';
 
 describe('Register component', () => {
-  it('should handle email typing correctly', async () => {
+  it('should handle username typing correctly', async () => {
     render(<BrowserRouter><Register register={() => { }} /></BrowserRouter>);
     const usernameInput = screen.getByLabelText('Username');
 
