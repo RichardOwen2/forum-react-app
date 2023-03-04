@@ -1,3 +1,8 @@
+/**
+ * - SearchBar Specs
+ *   - should call keywordChange function when any input change happen
+ */
+
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';

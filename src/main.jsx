@@ -10,7 +10,7 @@ import 'tw-elements';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter basename="/forum">
       <StrictMode>
         <App />
       </StrictMode>

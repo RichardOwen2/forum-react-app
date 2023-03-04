@@ -1,3 +1,9 @@
+/** 
+ * - asyncPopulateUsersAndThreads thunk
+ *  - should dispatch action correctly when data fetching success
+ *  - should dispatch action and call alert correctly when data fetching failed
+*/
+
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
 import { receiveThreadsActionCreator } from '../threads/action';
@@ -52,7 +58,7 @@ const fakeUsersResponse = [
 
 const fakeErrorResponse = new Error('Ups, something went wrong');
 
-describe('asyncPopulateUsersAndTalks thunk', () => {
+describe('asyncPopulateUsersAndThreads thunk', () => {
   beforeEach(() => {
     api._getAllUsers = api.getAllUsers;
     api._getAllThreads = api.getAllThreads;

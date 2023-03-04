@@ -23,6 +23,7 @@
     "react-lodash": "^0.1.2",
     "react-redux": "^8.0.5",
     "react-redux-loading-bar": "^5.0.4",
+    "react-router-config": "^5.1.1",
     "react-router-dom": "^6.8.1",
     "react-scripts": "^5.0.1",
     "redux-undo": "^1.0.1",

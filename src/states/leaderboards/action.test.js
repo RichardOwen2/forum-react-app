@@ -1,3 +1,9 @@
+/** 
+ * - asyncReceiveLeaderboards thunk
+ *  - should dispatch action correctly when data fetching success
+ *  - should dispatch action and call alert correctly when data fetching failed
+*/
+
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
 import {
@@ -28,7 +34,7 @@ const fakeLeaderboardsResponse = [
 
 const fakeErrorResponse = new Error('Ups, something went wrong');
 
-describe('setAuthUserActionCreator thunk', () => {
+describe('asyncReceiveLeaderboards thunk', () => {
   beforeEach(() => {
     api._getLeaderboards = api.getLeaderboards;
   });

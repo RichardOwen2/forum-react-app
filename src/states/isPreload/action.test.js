@@ -1,3 +1,9 @@
+/** 
+ * - asyncPreloadProcess thunk
+ *  - should dispatch action correctly when data fetching success
+ *  - should dispatch action correctly when data fetching failed
+*/
+
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
 import { setAuthUserActionCreator } from '../authUser/action';
@@ -15,7 +21,7 @@ const fakeProfileResponse = {
 
 const fakeErrorResponse = new Error('Ups, something went wrong');
 
-describe('setAuthUserActionCreator thunk', () => {
+describe('asyncPreloadProcess thunk', () => {
   beforeEach(() => {
     api._getOwnProfile = api.getOwnProfile;
   });

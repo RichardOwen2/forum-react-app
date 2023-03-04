@@ -1,3 +1,12 @@
+/** 
+ * - asyncSetAuthUser thunk
+ *  - should dispatch action correctly when data fetching success
+ *  - should dispatch action and return error.message correctly when data fetching failed
+ *  
+ * - asyncSetAuthUser thunk
+ *  - should dispatch action correctly when data fetching success
+*/
+
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
 import {
