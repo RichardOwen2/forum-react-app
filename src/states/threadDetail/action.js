@@ -134,7 +134,7 @@ function asyncDeleteVoteThreadDetail(threadId) {
     const { authUser: { id } } = getState();
     dispatch(deleteVoteThreadDetailActionCreator({ threadId, userId: id }));
     try {
-      await api.neutralVoteThread(id);
+      await api.neutralVoteThread(threadId);
     } catch (error) {
       alert(error.message);
       dispatch(ActionCreators.jump(-1, { name: 'THREADS_DETAIL' }));
