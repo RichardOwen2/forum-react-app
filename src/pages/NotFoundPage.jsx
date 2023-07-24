@@ -7,7 +7,7 @@ export default function NotFoundPage() {
 
   useEffect(() => {
     setTimeout(() => {
-      navigate('/');
+      navigate(-1);
     }, 3000);
   }, []);
 
